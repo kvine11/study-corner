@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 function DigitalClock(){
 
     const [time, setTime] = useState(new Date());
+    const [date, setDate] = useState(new Date())
 
 
 
@@ -18,7 +19,23 @@ function DigitalClock(){
         }
     } , []); //used when teh componenent mounts, renders, or some value updates. start timer only when we mount the component
 
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setDate(new Date())
+        }, 1000)
 
+        return () => {
+            clearInterval(intervalId);
+        }
+    })
+
+    function formatDate(){
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const year = date.getFullYear();
+
+        return `${padZero(month)} , ${padZero(day)} , ${padZero(year)}`
+    }
 
     function formatTime(){
         let hours = time.getHours(); //military time
@@ -38,6 +55,9 @@ function DigitalClock(){
     return(
         <div className="clock-container">
             <div className="clock-display">
+
+                <span>{formatDate()}</span>
+                <br></br>
                 <span>{formatTime()}</span>
             </div>
         </div> 
