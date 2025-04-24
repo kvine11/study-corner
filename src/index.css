@@ -145,6 +145,7 @@ button:focus-visible {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 15px;
 }
 
 .todo-item.completed {
@@ -160,6 +161,38 @@ button:focus-visible {
   padding: 0.2rem 0.5rem;
   border-radius: 3px;
   cursor: pointer;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+.task-button {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.task-button:hover {
+  background: rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.task-button.delete {
+  border-color: #ff0055;
+  color: #ff0055;
+}
+
+.task-button.delete:hover {
+  background: rgba(255, 0, 85, 0.2);
+  box-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
 }
 
 @media (prefers-color-scheme: light) {

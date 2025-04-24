@@ -33,18 +33,18 @@ function TodoList() {
     function moveTaskUp(index){
         if(index > 0)
         {
-            const updatedTasks = [...tasks]
-            [updatedTasks[index], updatedTasks[index - 1]] = [updatedTasks[index - 1], updatedTasks[index]]
-            setTasks(updatedTasks)
+            const updatedTasks = [...tasks];
+            [updatedTasks[index], updatedTasks[index - 1]] = [updatedTasks[index - 1], updatedTasks[index]];
+            setTasks(updatedTasks);
         }
     }
 
     function moveTaskDown(index){
         if(index < tasks.length - 1)
         {
-            const updatedTasks = [...tasks]
-            [updatedTasks[index + 1], updatedTasks[index]] = [updatedTasks[index], updatedTasks[index + 1]]
-            setTasks(updatedTasks)
+            const updatedTasks = [...tasks];
+            [updatedTasks[index + 1], updatedTasks[index]] = [updatedTasks[index], updatedTasks[index + 1]];
+            setTasks(updatedTasks);
         }
     }
 
@@ -71,19 +71,28 @@ function TodoList() {
                     <li
                         key={index}
                         className={`todo-item ${task.completed ? 'completed' : ''}`}
-                      
                     >
-                        {task.text}
-                        <button
-                            className="delete-button"
-                            onClick={() => deleteTask(index)}
-                        >
-                            
-                        </button>
-
-                        <button onClick = {() => moveTaskUp(index)}>↑</button>
-
-                        <button onClick={() =>moveTaskDown(index)}>↓</button>
+                        <span onClick={() => toggleTask(index)}>{task.text}</span>
+                        <div className="task-buttons">
+                            <button 
+                                className="task-button"
+                                onClick={() => moveTaskUp(index)}
+                            >
+                                ↑
+                            </button>
+                            <button 
+                                className="task-button"
+                                onClick={() => moveTaskDown(index)}
+                            >
+                                ↓
+                            </button>
+                            <button
+                                className="task-button delete"
+                                onClick={() => deleteTask(index)}
+                            >
+                                ×
+                            </button>
+                        </div>
                     </li>
                 ))}
             </ul>
