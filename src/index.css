@@ -200,28 +200,34 @@ button:focus-visible {
 }
 
 .task {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  padding: 10px 15px;
-  margin: 8px 0;
+  background: rgba(0, 0, 0, 0.6); /* Darker background for a sleek look */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  border-radius: 6px; /* Slightly rounded corners */
+  padding: 8px 12px; /* Reduced padding for a slimmer look */
+  margin: 10px 0; /* Space between tasks */
   color: #fff;
-  font-size: 16px;
+  font-size: 14px; /* Slightly smaller font size */
   display: flex;
   align-items: center;
-  gap: 10px; /* Add a small gap between the checkbox and text */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  gap: 10px; /* Space between checkbox and text */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
   cursor: grab;
+  width: 300px; /* Fixed width for uniform size */
+  height: 50px; /* Fixed height for uniform size */
+  overflow: hidden; /* Prevent content overflow */
 }
 
 .task-checkbox {
   margin-right: 10px;
-  transform: scale(1.2);
+  transform: scale(1.1); /* Slightly smaller checkbox */
 }
 
 .task-text {
   flex-grow: 1;
   text-align: left;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
 }
 
 @media (prefers-color-scheme: light) {

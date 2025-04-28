@@ -5,10 +5,8 @@ import { arrayMove } from "@dnd-kit/sortable";
 
 function TodoList() {
     const [tasks, setTasks] = useState([
-        { id: '1', text: 'Task 1', completed: false },
-        { id: '2', text: 'Task 2', completed: false },
-        { id: '3', text: 'Task 3', completed: false },
     ]);
+
     const [newTask, setNewTask] = useState('');
 
 
