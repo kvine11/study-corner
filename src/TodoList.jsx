@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
+import {closestCorners, DndContext} from '@dnd-kit/core';
+import Column from './Column';
+import { arrayMove } from "@dnd-kit/sortable";
 
 function TodoList() {
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState([
+        { id: '1', text: 'Task 1', completed: false },
+        { id: '2', text: 'Task 2', completed: false },
+        { id: '3', text: 'Task 3', completed: false },
+    ]);
     const [newTask, setNewTask] = useState('');
+
 
     function handleTask(event){
         setNewTask(event.target.value)
     }
 
-    function addTask(event) {
+    function addTask() {
         if (newTask.trim() !== "") {
-            setTasks(prevTask => [...tasks, { text: newTask, completed: false }]);
-            setNewTask('');
+            setTasks((tasks) => [...tasks, {id: tasks.length + 1, text: newTask, completed: false}]); //adds a new task to the list
+            setNewTask(''); //clears the input field after adding a task
         }
     }
 
@@ -30,23 +38,26 @@ function TodoList() {
         setTasks(updatedTasks);
     }
 
-    function moveTaskUp(index){
-        if(index > 0)
-        {
-            const updatedTasks = [...tasks];
-            [updatedTasks[index], updatedTasks[index - 1]] = [updatedTasks[index - 1], updatedTasks[index]];
-            setTasks(updatedTasks);
-        }
+    function getTaskPosition(id) {
+        return tasks.findIndex(task => task.id === id); //find the index of the task we are dragging
     }
 
-    function moveTaskDown(index){
-        if(index < tasks.length - 1)
-        {
-            const updatedTasks = [...tasks];
-            [updatedTasks[index + 1], updatedTasks[index]] = [updatedTasks[index], updatedTasks[index + 1]];
-            setTasks(updatedTasks);
+    function handleDragEnd(event) {
+        const {active, over} = event //active is the element we are dragging, over is the element which will be replaced
+
+        if (active.id === over.id) {
+          return;
         }
+
+        setTasks(tasks => {
+            const oldPos = getTaskPosition(active.id); //gets position of element before it was dragged
+            const newPos = getTaskPosition(over.id); //gets position of element after it was dragged
+
+            return arrayMove(tasks, oldPos, newPos); //moves the element to the new position
+        })
     }
+
+
 
     function clearList() {
         setTasks([]);
@@ -62,40 +73,16 @@ function TodoList() {
                 value={newTask}
                 onChange={handleTask}
             />
+
             <div style={{ textAlign: 'center' }}>
                 <button className="todo-button" onClick={addTask}>Add Task</button>
                 <button className="todo-button" onClick={clearList}>Clear List</button>
             </div>
-            <ul className="todo-list">
-                {tasks.map((task, index) => (
-                    <li
-                        key={index}
-                        className={`todo-item ${task.completed ? 'completed' : ''}`}
-                    >
-                        <span onClick={() => toggleTask(index)}>{task.text}</span>
-                        <div className="task-buttons">
-                            <button 
-                                className="task-button"
-                                onClick={() => moveTaskUp(index)}
-                            >
-                                ↑
-                            </button>
-                            <button 
-                                className="task-button"
-                                onClick={() => moveTaskDown(index)}
-                            >
-                                ↓
-                            </button>
-                            <button
-                                className="task-button delete"
-                                onClick={() => deleteTask(index)}
-                            >
-                                ×
-                            </button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+            
+            <DndContext collisionDetection={closestCorners} onDragEnd = {handleDragEnd}>
+                <Column tasks = {tasks}></Column>
+            </DndContext>
+
         </div>
     );
 }

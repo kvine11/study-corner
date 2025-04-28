@@ -132,6 +132,10 @@ button:focus-visible {
 .todo-list {
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the task boxes horizontally */
+  justify-content: center; /* Centers the task boxes vertically (if needed) */
 }
 
 .todo-item {
@@ -193,6 +197,31 @@ button:focus-visible {
 .task-button.delete:hover {
   background: rgba(255, 0, 85, 0.2);
   box-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
+}
+
+.task {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 8px 0;
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Add a small gap between the checkbox and text */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: grab;
+}
+
+.task-checkbox {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.task-text {
+  flex-grow: 1;
+  text-align: left;
 }
 
 @media (prefers-color-scheme: light) {
