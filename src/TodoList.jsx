@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { closestCorners, DndContext } from '@dnd-kit/core';
+import { closestCenter, DndContext } from '@dnd-kit/core';
 import Column from './Column';
 import { arrayMove } from "@dnd-kit/sortable";
 
@@ -16,10 +16,10 @@ function TodoList() {
             setTasks((prevTasks) => [
                 ...prevTasks, 
                 {
-                    id: tasks.length + 1,
+                    id: Date.now().toString(), 
                     text: newTask, 
                     completed: false,
-                    status: 'backlog' // New tasks go to TODO column
+                    status: 'backlog'
                 }
             ]);
             setNewTask('');
@@ -40,27 +40,48 @@ function TodoList() {
         
         if (activeId === overId) return;
 
+        const activeTask = tasks.find(task => task.id === activeId);
+        
         // Check if dropped on a column
         if (String(overId).includes('column-')) {
             const newStatus = overId.replace('column-', '');
-            setTasks(prevTasks => 
-                prevTasks.map(task => 
-                    task.id === activeId 
-                        ? {...task, status: newStatus} 
-                        : task
-                )
-            );
-        } else {
-            // Reorder within column
-            setTasks(prevTasks => {
-                const oldIndex = getTaskPosition(activeId);
-                const newIndex = getTaskPosition(overId);
-                
-                if (oldIndex !== -1 && newIndex !== -1) {
-                    return arrayMove(prevTasks, oldIndex, newIndex);
-                }
-                return prevTasks;
-            });
+            // Only update if status is actually changing
+            if (activeTask && activeTask.status !== newStatus) {
+                setTasks(prevTasks => 
+                    prevTasks.map(task => 
+                        task.id === activeId 
+                            ? {...task, status: newStatus} 
+                            : task
+                    )
+                );
+            }
+        } 
+        // Check if dropped on another task
+        else {
+            const overTask = tasks.find(task => task.id === overId);
+            
+            // If dropped on a task in the same column, reorder
+            if (activeTask && overTask && activeTask.status === overTask.status) {
+                setTasks(prevTasks => {
+                    const oldIndex = getTaskPosition(activeId);
+                    const newIndex = getTaskPosition(overId);
+                    
+                    if (oldIndex !== -1 && newIndex !== -1) {
+                        return arrayMove(prevTasks, oldIndex, newIndex);
+                    }
+                    return prevTasks;
+                });
+            }
+            // If dropped on a task in a different column, move to that column
+            else if (activeTask && overTask && activeTask.status !== overTask.status) {
+                setTasks(prevTasks => 
+                    prevTasks.map(task => 
+                        task.id === activeId 
+                            ? {...task, status: overTask.status} 
+                            : task
+                    )
+                );
+            }
         }
     }
 
@@ -68,7 +89,7 @@ function TodoList() {
         setTasks([]);
     }
 
-    // Filter tasks by status - moved inside component after tasks is defined
+    // Filter tasks by status
     const backlogTasks = tasks.filter(task => task.status === 'backlog' || !task.status) || [];
     const inProgressTasks = tasks.filter(task => task.status === 'inProgress') || [];
     const doneTasks = tasks.filter(task => task.status === 'done') || [];
@@ -91,27 +112,24 @@ function TodoList() {
                 </div>
             </div>
             
-            <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+            <DndContext 
+                collisionDetection={closestCenter}
+                onDragEnd={handleDragEnd}
+            >
                 <div className="kanban-board">
                     <div className="kanban-column">
                         <h3 className="column-title">TODO</h3>
-                        <div className="column-content">
-                            <Column id="column-backlog" tasks={backlogTasks} />
-                        </div>
+                        <Column id="column-backlog" tasks={backlogTasks} />
                     </div>
                     
                     <div className="kanban-column">
                         <h3 className="column-title">DOING</h3>
-                        <div className="column-content">
-                            <Column id="column-inProgress" tasks={inProgressTasks} />
-                        </div>
+                        <Column id="column-inProgress" tasks={inProgressTasks} />
                     </div>
                     
                     <div className="kanban-column">
                         <h3 className="column-title">DONE</h3>
-                        <div className="column-content">
-                            <Column id="column-done" tasks={doneTasks} />
-                        </div>
+                        <Column id="column-done" tasks={doneTasks} />
                     </div>
                 </div>
             </DndContext>
