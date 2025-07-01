@@ -1,5 +1,6 @@
 import React from "react";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { useDroppable } from "@dnd-kit/core";
 import Task from "./Task";
 
 function Column({ tasks }) { //a column copmponent represents a bunch of tasks
@@ -18,6 +19,7 @@ function Column({ tasks }) { //a column copmponent represents a bunch of tasks
                             </li>
                         );
                     })}
+
                 </ul>
             </SortableContext>
         </div>
