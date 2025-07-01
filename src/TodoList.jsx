@@ -16,21 +16,23 @@ function TodoList() {
 
     function addTask() {
         if (newTask.trim() !== "") {
-            setTasks((tasks) => [...tasks, {id: tasks.length + 1, text: newTask, completed: false}]); //adds a new task to the list
+            setTasks((tasks) => [...tasks, {id: tasks.length + 1, text: newTask, completed: false}]); //adds a new task to the list. creates new 
+            //properties of id, text, and completed
             setNewTask(''); //clears the input field after adding a task
         }
     }
 
     function deleteTask(index) {
         const newTasks = tasks.filter((task, i) => i !== index);
-        setTasks(prevTask => newTasks);
+        setTasks(newTasks);
     }
 
     function toggleTask(index) {
         const updatedTasks = tasks.map((task, i) => {
             if (i === index) {
                 return { ...task, completed: !task.completed };
-            }
+            } //creates a new array with the updated tasks. spread operator keeps the original properties and changes the completed property. 
+            //runs a function on each task
             return task;
         });
         setTasks(updatedTasks);
@@ -41,7 +43,8 @@ function TodoList() {
     }
 
     function handleDragEnd(event) {
-        const {active, over} = event //active is the element we are dragging, over is the element which will be replaced
+        const active = event.active; //object that is being dragged
+        const over = event.over; //object that is being dragged to
 
         if (active.id === over.id) {
           return;
@@ -77,8 +80,8 @@ function TodoList() {
                 <button className="todo-button" onClick={clearList}>Clear List</button>
             </div>
             
-            <DndContext collisionDetection={closestCorners} onDragEnd = {handleDragEnd}>
-                <Column tasks = {tasks}></Column>
+            <DndContext collisionDetection={closestCorners} onDragEnd = {handleDragEnd}> 
+                <Column tasks = {tasks} ></Column>
             </DndContext>
 
         </div>
