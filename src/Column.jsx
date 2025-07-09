@@ -2,14 +2,14 @@ import React from "react";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import Task from "./Task";
 
-function Column({ tasks }) {
+function Column(props) { //tasks and deleteTask are props
     return (
         <div>
-            <SortableContext items={tasks.map(task => task.id)} strategy={verticalListSortingStrategy}>
+            <SortableContext items={props.tasks.map(task => task.id)} strategy={verticalListSortingStrategy}>
                 <ul className="todo-list">
-                    {tasks.map(task => (
+                    {props.tasks.map((task, index) => (
                         <li key={task.id} className={`todo-item ${task.completed ? "completed" : ""}`}>
-                            <Task id={task.id} text={task.text} />
+                            <Task id={task.id} text={task.text} deleteTask={() => props.deleteTask(index)} />
                         </li>
                     ))}
                 </ul>

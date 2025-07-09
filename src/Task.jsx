@@ -2,8 +2,8 @@ import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-function Task({ id, text }) {
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+function Task(props) { //id text and deleteTask are props
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: props.id });
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -11,9 +11,9 @@ function Task({ id, text }) {
     };
 
     return (
-        <div ref={setNodeRef} {...attributes} {...listeners} style={style} className="task">
-            <input type="checkbox" className="task-checkbox" />
-            <span className="task-text">{text}</span>
+        <div ref={setNodeRef} style={style} className="task">
+            <input type="checkbox" className="task-checkbox" onChange={props.deleteTask} />
+            <span {...attributes} {...listeners} className="task-text">{props.text}</span>
         </div>
     );
 }

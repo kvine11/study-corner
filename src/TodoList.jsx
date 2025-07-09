@@ -23,17 +23,7 @@ function TodoList() {
 
     function deleteTask(index) {
         const newTasks = tasks.filter((task, i) => i !== index);
-        setTasks(prevTask => newTasks);
-    }
-
-    function toggleTask(index) {
-        const updatedTasks = tasks.map((task, i) => {
-            if (i === index) {
-                return { ...task, completed: !task.completed };
-            }
-            return task;
-        });
-        setTasks(updatedTasks);
+        setTasks(newTasks);
     }
 
     function getTaskPosition(id) {
@@ -78,7 +68,7 @@ function TodoList() {
             </div>
             
             <DndContext collisionDetection={closestCorners} onDragEnd = {handleDragEnd}>
-                <Column tasks = {tasks}></Column>
+                <Column tasks = {tasks} deleteTask = {deleteTask}></Column>
             </DndContext>
 
         </div>
