@@ -21,6 +21,11 @@ function TodoList() {
         }
     }
 
+    function addTaskKeyDown(event) {
+        if (event.key === 'Enter') {
+            addTask();
+        }
+    }
     /**
      * Deletes a task with a fade out animation
      * @param {number} index - The index of the task to delete
@@ -75,6 +80,7 @@ function TodoList() {
                 placeholder="Enter new task..."
                 value={newTask}
                 onChange={handleTask}
+                onKeyDown={addTaskKeyDown}
             />
 
             <div style={{ textAlign: 'center' }}>
