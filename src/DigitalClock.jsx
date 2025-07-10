@@ -40,6 +40,7 @@ function DigitalClock(){
                                 setIsRunning(false);
                                 return 0;
                             }
+                            console.log(timer);
                             return timer - 1;
                         });
                         return 59;
@@ -59,7 +60,7 @@ function DigitalClock(){
         const day = date.getDate();
         const year = date.getFullYear();
 
-        return `${padZero(month)} , ${padZero(day)} , ${padZero(year)}`
+        return `${padZero(month)} / ${padZero(day)} / ${padZero(year)}`
     }
 
     function formatTime(){
