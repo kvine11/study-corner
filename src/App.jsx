@@ -1,22 +1,16 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import DigitalClock from './DigitalClock'
 import TodoList from './TodoList'
 
-
 function App() {
- 
-
   return (
-    <>
-      <DigitalClock/>
-
-      <TodoList/>
-
-
-    </>
+    <div className="app-container">
+      <div className="clock-and-timer">
+        <DigitalClock />
+      </div>
+      <TodoList />
+    </div>
   )
 }
 

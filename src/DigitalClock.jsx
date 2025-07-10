@@ -94,8 +94,7 @@ function DigitalClock(){
     }
 
     function handleTimerChange(e) {
-        const value = parseInt(e.target.value) || 0;
-        setTimer(Math.max(0, value));
+        setTimer(e.target.value);
         setSeconds(0);
     }
 
@@ -119,7 +118,7 @@ function DigitalClock(){
                         value={timer} 
                         onChange={handleTimerChange}
                         disabled={isRunning}
-                        min="0"
+                        
                     />
                     <div className="timer-display">{formatTimer()}</div>
                     <button onClick={startTimer} disabled={isRunning || (timer === 0 && seconds === 0)}>Start</button>
