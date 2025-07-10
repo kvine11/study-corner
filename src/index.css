@@ -244,6 +244,70 @@ button:focus-visible {
   text-overflow: ellipsis; /* Add ellipsis for long text */
 }
 
+.pomodoro-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pomodoro-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.timer-display {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    margin: 1rem 0;
+}
+
+.pomodoro-timer input {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #00ffff;
+    border-radius: 5px;
+    padding: 0.5rem;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    width: 100px;
+    text-align: center;
+}
+
+.pomodoro-timer input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pomodoro-timer button {
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    border: none;
+    padding: 0.5rem 1.5rem;
+    color: black;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0.5rem;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.pomodoro-timer button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+}
+
+.pomodoro-timer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: linear-gradient(45deg, #666, #999);
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
