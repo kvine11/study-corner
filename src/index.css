@@ -199,6 +199,15 @@ button:focus-visible {
   box-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
 }
 
+@keyframes hide{
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
 .task {
   background: rgba(0, 0, 0, 0.6); /* Darker background for a sleek look */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
@@ -215,6 +224,11 @@ button:focus-visible {
   width: 300px; /* Fixed width for uniform size */
   height: 50px; /* Fixed height for uniform size */
   overflow: hidden; /* Prevent content overflow */
+  animation-name: hide;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-delay: 0.3s;
+  animation-play-state: paused;
 }
 
 .task-checkbox {

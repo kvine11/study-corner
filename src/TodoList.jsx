@@ -21,9 +21,24 @@ function TodoList() {
         }
     }
 
+    /**
+     * Deletes a task with a fade out animation
+     * @param {number} index - The index of the task to delete
+     */
     function deleteTask(index) {
-        const newTasks = tasks.filter((task, i) => i !== index);
-        setTasks(newTasks);
+        // Find the task element using its data attribute
+        const taskElement = document.querySelector(`[data-task-index="${index}"]`);
+        
+        if (taskElement) { //checks if the task element exists
+            // Start the fade out animation by changing animation-play-state from 'paused' to 'running'
+            taskElement.style.animationPlayState = 'running';
+            
+            // Wait for the animation to complete before removing the task from state
+            taskElement.addEventListener('animationend', () => {
+                // Remove the task from the tasks array by filtering out the task at the given index
+                setTasks(tasks => tasks.filter((_, i) => i !== index));
+            });
+        }
     }
 
     function getTaskPosition(id) {

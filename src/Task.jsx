@@ -11,7 +11,7 @@ function Task(props) { //id text and deleteTask are props
     };
 
     return (
-        <div ref={setNodeRef} style={style} className="task">
+        <div ref={setNodeRef} style={style} className="task" data-task-index={props.index}>
             <input type="checkbox" className="task-checkbox" onChange={props.deleteTask} />
             <span {...attributes} {...listeners} className="task-text">{props.text}</span>
         </div>

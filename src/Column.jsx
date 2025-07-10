@@ -9,7 +9,7 @@ function Column(props) { //tasks and deleteTask are props
                 <ul className="todo-list">
                     {props.tasks.map((task, index) => (
                         <li key={task.id} className={`todo-item ${task.completed ? "completed" : ""}`}>
-                            <Task id={task.id} text={task.text} deleteTask={() => props.deleteTask(index)} />
+                            <Task id={task.id} text={task.text} index={index} deleteTask={() => props.deleteTask(index)} />
                         </li>
                     ))}
                 </ul>
