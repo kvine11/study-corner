@@ -1,0 +1,85 @@
+.task {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  cursor: grab;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.task:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.task:active {
+  cursor: grabbing;
+}
+
+.task-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.task-checkbox:checked {
+  background: #646cff;
+  border-color: #646cff;
+}
+
+.task-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.task-checkbox:hover {
+  border-color: #646cff;
+  transform: scale(1.05);
+}
+
+.task-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 500;
+  flex-grow: 1;
+  user-select: none;
+}
+
+.task-checkbox:checked + .task-text {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.drag-handle {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.2rem;
+  cursor: grab;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.drag-handle:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+} 
