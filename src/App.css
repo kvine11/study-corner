@@ -5,6 +5,55 @@
   text-align: center;
 }
 
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.clock-and-timer {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.spotify-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+@media (min-width: 1024px) {
+  .app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+      "clock todo"
+      "spotify spotify";
+  }
+
+  .clock-and-timer {
+    grid-area: clock;
+    margin-right: 1rem;
+  }
+
+  .todo-list {
+    grid-area: todo;
+  }
+
+  .spotify-section {
+    grid-area: spotify;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

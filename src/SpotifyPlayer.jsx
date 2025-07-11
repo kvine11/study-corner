@@ -9,7 +9,8 @@ function SpotifyPlayer() {
   const [error, setError] = useState(null);
 
   // You'll need to replace this with your actual token
-  const token = 'BQA0Wwl0XKF-_yCEuPtjTz65MOYKF6wcVli-MNDFFk709w43DJv91qfEEWE98CyW_pAGAt8xrRnXZIlanwE58fDwPfeDITeiN1P8xlDVfe497Ae4nmhjowKTCC_0SNLIdIl6xJROsP4xpaGX6Qy0Xy7x81QSeo8WmpIpJvGRe9ZD06IzAApKFNvhuroK4-xrdG1YkRQ4_AkuMEJiYO5FlWAO57GISDfRoUYx8zZ4uss_TR9KEL7JakW_l7IBst4Wa3Gc';
+  const token = 'BQBNYaY82weAcwNrcOC_C8Fclx3RSLJ8sHcIyb0O96PTv0KD7QD86XTwhhKcopVZ_G3jc1yU0ONu0jJwDkjY3zNAKEAsGKiFM--scRBDY0tjzlGsrUpnaeMblqQw8FTWQmV9Rr8RcL-OwBCrB0Q4fhDf9TM5qXP_iX0vgP48PhjZQA3ic_hN69uTkcWOtX7wp-xnCBtjpN9BGEdO0zQij9xtAQHQK72q9k2_-WhK_YQfo-JGGCwwhKqmaMMLl6iYVG_s';
+
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -198,6 +199,8 @@ function SpotifyPlayer() {
               Start Playing
             </button>
           )}
+
+          
         </div>
       </div>
     </div>
