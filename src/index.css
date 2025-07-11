@@ -372,6 +372,18 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
+.spotify-wrapper {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spotify-player {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
 /* Responsive design */
 @media (max-width: 1200px) {
   #root {
