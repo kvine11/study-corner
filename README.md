@@ -1,1 +1,1 @@
-Digital Clock and Todo Task using React
+Study Corner using React and Spotify Web Playback SDK
